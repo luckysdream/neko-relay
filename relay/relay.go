@@ -2,9 +2,7 @@ package relay
 
 import (
 	"io"
-	"log"
 	"neko-relay/config"
-	"neko-relay/limits"
 	. "neko-relay/rules"
 	"net"
 	"net/http"
@@ -46,9 +44,9 @@ func NewRelay(r Rule, tcpTimeout, udpTimeout int, traffic *TF, protocol string) 
 	if err != nil {
 		return nil, err
 	}
-	if err := limits.Raise(); err != nil {
+	/* 	if err := limits.Raise(); err != nil {
 		log.Println("Try to raise system limits, got", err)
-	}
+	} */
 	s := &Relay{
 		TCPAddr:    taddr,
 		UDPAddr:    uaddr,
