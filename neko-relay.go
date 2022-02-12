@@ -174,6 +174,7 @@ func main() {
 	go Init()
 	fmt.Println("Api port:", Config.Port)
 	fmt.Println("Api key:", Config.Key)
+	lodasjson()
 	r.Run(":" + strconv.Itoa(Config.Port))
 }
 func Init() {

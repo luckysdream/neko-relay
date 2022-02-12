@@ -1,7 +1,9 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"neko-relay/relay"
 	. "neko-relay/rules"
 	"net"
@@ -103,6 +105,28 @@ func getIP(host string) (string, error) {
 		return "", err
 	}
 	return ips[0], nil
+}
+
+func lodasjson() {
+	/* 	if Config.Syncfile != "" {
+		data, err := ioutil.ReadFile("db.json")
+		newRules := make(map[string]Rule)
+		if err == nil {
+			newRules := make(map[string]Rule)
+			json.Unmarshal(data, &newRules)
+			syncnode(newRules)
+		} else {
+			log.Println(err)
+		}
+	} */
+	data, _ := ioutil.ReadFile("db.json")
+	newRules := make(map[string]Rule)
+	json.Unmarshal(data, &newRules)
+	fmt.Println(data)
+	for k, v := range newRules {
+		fmt.Printf("k:%s v:%v", k, v)
+	}
+	sync(newRules)
 }
 
 func ddns() {
